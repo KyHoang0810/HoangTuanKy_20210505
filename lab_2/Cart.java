@@ -36,5 +36,17 @@ public class Cart {
 		}
 		return fee;
 	}
+	public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList){
+		for(int i=0;i<dvdList.length;i++) {
+			if(qtyOrdered<20) 
+				if(dvdList[i]!=null) {
+					itemsOrdered[qtyOrdered]=dvdList[i];
+					qtyOrdered+=1;
+					System.out.println(dvdList[i].getTitle() +" has been added to the cart.");
+					}
+			if(qtyOrdered==20) {System.out.println("The cart is full.");break;}
+		}
+		
+	}
 
 }
