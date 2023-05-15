@@ -74,7 +74,7 @@ public class Cart {
 		}
 		else {
 			System.out.println("The cart is full"); 
-			return ;
+			
 		}
 	}
 	public void print() {
