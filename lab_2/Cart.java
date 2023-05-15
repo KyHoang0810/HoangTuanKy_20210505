@@ -36,5 +36,13 @@ public class Cart {
 		}
 		return fee;
 	}
+	public void print() {
+		System.out.println("***********************CART*********************");
+		System.out.println("Ordered Items:");
+		for(int i=0;i<qtyOrdered;i++)
+			System.out.println("DVD - "+itemsOrdered[i].getTitle()+"- "+itemsOrdered[i].getCategory()+"- " +itemsOrdered[i].getDirector()+"- "+itemsOrdered[i].getLength()+": "+itemsOrdered[i].getCost()+"$");
+		System.out.println("Total cost: "+totalCost());
+		System.out.println("************************************************");
+	}
 
 }
