@@ -49,4 +49,13 @@ public class DigitalVideoDisc {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	private int id;
+	private static int nbDigitalVideoDiscs = 0;
+	public int getId() {
+		return id;
+	}
+	public void setId() {
+		this.id = nbDigitalVideoDiscs;
+		nbDigitalVideoDiscs =nbDigitalVideoDiscs + 1 ;
+	}
 }
