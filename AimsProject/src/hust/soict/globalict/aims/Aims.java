@@ -1,13 +1,13 @@
-package hust.soict.dsai.aims;
+package hust.soict.globalict.aims;
 import java.util.*;
 
-import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.media.Book;
-import hust.soict.dsai.aims.media.CompactDisc;
-import hust.soict.dsai.aims.media.DigitalVideoDisc;
-import hust.soict.dsai.aims.media.Media;
-import hust.soict.dsai.aims.media.Track;
-import hust.soict.dsai.aims.store.Store; 
+import hust.soict.globalict.aims.cart.Cart;
+import hust.soict.globalict.aims.media.Book;
+import hust.soict.globalict.aims.media.CompactDisc;
+import hust.soict.globalict.aims.media.DigitalVideoDisc;
+import hust.soict.globalict.aims.media.Media;
+import hust.soict.globalict.aims.media.Track;
+import hust.soict.globalict.aims.store.Store; 
 public class Aims {
 	public static Store store=new Store();
 	public static void showMenu() {

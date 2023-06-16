@@ -1,9 +1,9 @@
-package hust.soict.dsai.aims.cart;
+package hust.soict.globalict.aims.cart;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.List;
 
-import hust.soict.dsai.aims.media.Media;
+import hust.soict.globalict.aims.media.Media;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDER=20;
