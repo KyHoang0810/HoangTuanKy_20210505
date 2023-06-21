@@ -2,6 +2,7 @@ package hust.soict.globalict.aims;
 import java.util.*;
 
 import hust.soict.globalict.aims.cart.Cart;
+import hust.soict.globalict.aims.exception.PlayerException;
 import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.CompactDisc;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
@@ -55,7 +56,7 @@ public class Aims {
 	}
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PlayerException{
 		Cart anOrder=new Cart();
 		Scanner sc=new Scanner(System.in);
 		int a=0;
@@ -209,7 +210,7 @@ public class Aims {
 						System.out.println("Enter number of authors:");
 						int nbofauthors=sc.nextInt();
 						List<String> authorlist=new ArrayList<String>();
-						for(int i=1;i<=nbofauthors-1;i++) {
+						for(int i=1;i<=nbofauthors;i++) {
 							System.out.println("Enter author number "+i+":");
 							sc.nextLine();
 							String author=sc.nextLine();

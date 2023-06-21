@@ -26,6 +26,7 @@ import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
 import hust.soict.globalict.aims.store.Store;
+import javafx.stage.Stage;
 
 public class StoreScreen extends JFrame {
 	private Store store;
@@ -40,15 +41,23 @@ public class StoreScreen extends JFrame {
 	}
 	JMenuBar createMenuBar() {
 		JMenu menu=new JMenu("Options");
-		
+		MenuListener mnListen=new MenuListener();
 		JMenu smUpdateStore=new JMenu("Update Store");
-		smUpdateStore.add(new JMenu("Add Book"));
-		smUpdateStore.add(new JMenu("Add CD"));
-		smUpdateStore.add(new JMenu("Add DVD"));
+		JMenuItem jmaddBook=new JMenuItem("Add Book");
+		JMenuItem jmaddCD=new JMenuItem("Add CD");
+		JMenuItem jmaddDVD=new JMenuItem("Add DVD");
+		jmaddBook.addActionListener(mnListen);
+		jmaddCD.addActionListener(mnListen);
+		jmaddDVD.addActionListener(mnListen);
+		smUpdateStore.add(jmaddBook);
+		smUpdateStore.add(jmaddCD);
+		smUpdateStore.add(jmaddDVD);
 		
 		menu.add(smUpdateStore);
 		menu.add(new JMenuItem("View store"));
-		menu.add(new JMenuItem("View cart"));
+		JMenuItem jmviewCart=new JMenuItem("View cart");
+		jmviewCart.addActionListener(mnListen);
+		menu.add(jmviewCart);
 		
 		JMenuBar menuBar=new JMenuBar();
 		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -138,6 +147,30 @@ public class StoreScreen extends JFrame {
 		setTitle("Store");
 		setSize(1024,768);
 		// TODO Auto-generated constructor stub
+	}
+	public class MenuListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String button = e.getActionCommand();
+			if (button.equals("Add Book")) {
+				dispose();
+				new AddBooktoStoreScreen(store,cart);
+			}
+			else if(button.equals("Add CD")){
+				dispose();
+				new AddCDtoStoreScreen(store,cart);
+			}
+			else if (button.equals("Add DVD")) {
+				dispose();
+				new AddDVDtoStoreScreen(store,cart);
+			}
+			else if(button.equals("View cart")) {
+				dispose();
+				new CartScreen(cart,store);
+			}
+			
+		}
 	}
 	
 	

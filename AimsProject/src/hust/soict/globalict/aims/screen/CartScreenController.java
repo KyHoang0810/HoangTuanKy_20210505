@@ -1,5 +1,7 @@
 package hust.soict.globalict.aims.screen;
 
+import javax.swing.SwingUtilities;
+
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.DigitalVideoDisc;
 import hust.soict.globalict.aims.media.Media;
@@ -16,12 +18,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 public class CartScreenController {
 	private Store store;
 	private Cart cart;
@@ -43,13 +49,25 @@ public class CartScreenController {
 	private Label totalCost;
 	@FXML
 	private MenuItem menuAddBook;
+	@FXML
+	private MenuItem menuAddDVD;
+	@FXML
+	private MenuItem menuAddCD;
+	@FXML
+	private MenuItem menuViewStore;
 	
-	public CartScreenController(Cart cart,Store store) {
+	public CartScreenController(Cart cart,Store store,Runnable windowCloser) {
 		super();
+		this.windowCloser=windowCloser;
 		this.cart=cart;
 		this.store=store;
 		
 	}
+	private Runnable windowCloser ;
+
+    
+
+
 	@FXML
 	private void initialize() {
 		colMediaTitle.setCellValueFactory(new PropertyValueFactory<Media, String>("Title"));
@@ -103,10 +121,29 @@ public class CartScreenController {
 	}
 	@FXML
 	void menuAddBookPressed(ActionEvent event) {
-		new AddBooktoStoreScreen(store);
-		Stage stage = (Stage)btnPlaceOrder.getScene().getWindow();
-		stage.hide();
+		windowCloser.run();
+		new AddBooktoStoreScreen(store,cart);
+	
 	}
+	@FXML
+	void menuAddDVDPressed(ActionEvent event) {
+		windowCloser.run();
+		new AddDVDtoStoreScreen(store,cart);
+	
+	}
+	@FXML
+	void menuAddCDPressed(ActionEvent event) {
+		windowCloser.run();
+		new AddCDtoStoreScreen(store,cart);
+	
+	}
+	@FXML
+	void menuViewStorePressed(ActionEvent event) {
+		windowCloser.run();
+		new StoreScreen(store,cart);
+	
+	}
+	
 	
 
 }

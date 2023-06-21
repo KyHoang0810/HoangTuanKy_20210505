@@ -3,6 +3,7 @@ package hust.soict.globalict.aims.screen;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -23,12 +24,16 @@ public class CartScreen extends JFrame {
 		this.add(fxPanel);
 		this.setTitle("Cart");
 		this.setVisible(true);
+		Runnable windowCloser = () -> SwingUtilities.invokeLater(
+		        () -> this.setVisible(false)
+		    );
+
 		Platform.runLater(new Runnable(){
 			@Override
 			public void run() {
 				try {
 					FXMLLoader loader=new FXMLLoader(getClass().getResource("cart.fxml"));
-					CartScreenController controller=new CartScreenController(cart,store);
+					CartScreenController controller=new CartScreenController(cart,store,windowCloser);
 					loader.setController(controller);
 					Parent root=loader.load();
 					fxPanel.setScene(new Scene(root));

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="bdPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <VBox prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,18 +29,18 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <MenuBar>
+            <MenuBar fx:id="menuBar">
               <menus>
                 <Menu mnemonicParsing="false" text="Options">
                   <items>
                         <Menu mnemonicParsing="false" text="Update Store">
                           <items>
                             <MenuItem fx:id="menuAddBook" mnemonicParsing="false" onAction="#menuAddBookPressed" text="Add Book" />
-                              <MenuItem fx:id="menuAddCD" mnemonicParsing="false" text="Add CD" />
-                              <MenuItem fx:id="menuAddDVD" mnemonicParsing="false" text="Add DVD" />
+                              <MenuItem fx:id="menuAddCD" mnemonicParsing="false" onAction="#menuAddCDPressed" text="Add CD" />
+                              <MenuItem fx:id="menuAddDVD" mnemonicParsing="false" onAction="#menuAddDVDPressed" text="Add DVD" />
                           </items>
                         </Menu>
-                    <MenuItem mnemonicParsing="false" text="View Store" />
+                    <MenuItem fx:id="menuViewStore" mnemonicParsing="false" onAction="#menuViewStorePressed" text="View Store" />
                         <MenuItem mnemonicParsing="false" text="View Cart" />
                   </items>
                 </Menu>
@@ -50,7 +50,7 @@
       </VBox>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vbCenter" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Filter" />
             <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0">

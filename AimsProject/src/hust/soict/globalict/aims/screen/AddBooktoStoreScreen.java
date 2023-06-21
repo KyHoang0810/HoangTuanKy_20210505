@@ -19,8 +19,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Book;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
@@ -28,7 +33,7 @@ import hust.soict.globalict.aims.screen.StoreScreen.MediaStore;
 import hust.soict.globalict.aims.store.Store;
 
 
-public class AddBooktoStoreScreen extends AddItemsScreen{
+public class AddBooktoStoreScreen extends JFrame {
 	private TextField bookTitleInput;
 	private TextField bookCategoryInput;
 	private TextField bookAuthorsInput;
@@ -42,8 +47,10 @@ public class AddBooktoStoreScreen extends AddItemsScreen{
 	private String category;
 	private float cost;
 	private Store store;
+	private Cart cart;
 
-	public AddBooktoStoreScreen(Store store) {
+	public AddBooktoStoreScreen(Store store,Cart cart){
+		this.cart=cart;
 		this.store=store;
 		Container cp=getContentPane();
 		cp.setLayout(new BorderLayout());	
@@ -116,6 +123,7 @@ public class AddBooktoStoreScreen extends AddItemsScreen{
 		public void actionPerformed(ActionEvent evt) {
 			String BookTitle= bookTitleInput.getText();
 			bookTitleInput.setText("");
+			bookTitleInput.setEditable(false);
 			bookTitleOutput.setText(BookTitle);
 		    title=BookTitle;
 		}
@@ -128,6 +136,7 @@ public class AddBooktoStoreScreen extends AddItemsScreen{
 			bookCategoryInput.setText("");
 			bookCategoryOutput.setText(BookCategory);
 			category=BookCategory;
+			bookCategoryInput.setEditable(false);
 		}
 		
 	}
@@ -148,6 +157,7 @@ public class AddBooktoStoreScreen extends AddItemsScreen{
 			float BookCost= Float.parseFloat(bookCostInput.getText());
 			bookCostInput.setText("");
 			bookCostOutput.setText(""+BookCost);
+			bookCostInput.setEditable(false);
 			cost=BookCost;
 		}
 		
@@ -178,6 +188,82 @@ public class AddBooktoStoreScreen extends AddItemsScreen{
 				bookCostOutput.setText("");
 				bookAuthorsOutput.setText("");
 			}
+		
+		}
+	}
+	JPanel createNorth() {
+		JPanel north=new JPanel();
+		north.setLayout(new BoxLayout(north,BoxLayout.Y_AXIS));
+		north.add(createMenuBar());
+		north.add(createHeader());
+		return north;
+		
+	}
+	JMenuBar createMenuBar() {
+		JMenu menu=new JMenu("Options");
+		
+		MenuListener mnListen=new MenuListener();
+		JMenu smUpdateStore=new JMenu("Update Store");
+		JMenuItem jmaddBook=new JMenuItem("Add Book");
+		JMenuItem jmaddCD=new JMenuItem("Add CD");
+		JMenuItem jmaddDVD=new JMenuItem("Add DVD");
+		jmaddBook.addActionListener(mnListen);
+		jmaddCD.addActionListener(mnListen);
+		jmaddDVD.addActionListener(mnListen);
+		smUpdateStore.add(jmaddBook);
+		smUpdateStore.add(jmaddCD);
+		smUpdateStore.add(jmaddDVD);
+		
+		menu.add(smUpdateStore);
+		JMenuItem jmviewStore=new JMenuItem("View store");
+		jmviewStore.addActionListener(mnListen);
+		menu.add(jmviewStore);
+		JMenuItem jmviewCart=new JMenuItem("View cart");
+		jmviewCart.addActionListener(mnListen);
+		menu.add(jmviewCart);
+		
+		JMenuBar menuBar=new JMenuBar();
+		menuBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+		menuBar.add(menu);
+		
+		return menuBar;
+	}
+	JPanel createHeader() {
+		JPanel header=new JPanel();
+		header.setLayout(new BoxLayout(header,BoxLayout.X_AXIS));
+		
+		JLabel title=new JLabel("Add Items:");
+		title.setFont(new Font(title.getFont().getName(),Font.PLAIN,50));
+		title.setForeground(Color.CYAN);
+		
+		header.add(Box.createRigidArea(new Dimension(10,10)));
+		header.add(title);
+		header.add(Box.createRigidArea(new Dimension(10,10)));
+		
+		return header;
+	}
+	public class MenuListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String button = e.getActionCommand();
+			if (button.equals("Add Book")) {
+				dispose();
+				new AddBooktoStoreScreen(store,cart);
+			}
+			else if(button.equals("Add CD")){
+				dispose();
+				new AddCDtoStoreScreen(store,cart);
+			}
+			else if(button.equals("Add DVD")){
+				dispose();
+				new AddDVDtoStoreScreen(store,cart);
+			}
+			else if(button.equals("View store")) {
+				dispose();
+				new StoreScreen(store,cart);
+			}
+			else if(button.equals("View cart")){dispose();new CartScreen(cart,store);}
 			
 		}
 	}
