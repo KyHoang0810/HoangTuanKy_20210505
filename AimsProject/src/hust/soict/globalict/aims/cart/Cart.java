@@ -4,10 +4,14 @@ import java.util.*;
 import java.util.List;
 
 import hust.soict.globalict.aims.media.Media;
+import javafx.collections.FXCollections;
+import javafx.collections.FXCollections.*;
+import javafx.collections.ObservableList;
 
 public class Cart {
 	public static final int MAX_NUMBERS_ORDER=20;
-	private ArrayList<Media> itemsOrdered=new ArrayList<Media>();
+	
+	private ObservableList<Media> itemsOrdered= FXCollections.observableArrayList();
 	public void addMedia(Media media) {
 		if(itemsOrdered.size()<20) {
 			itemsOrdered.add(media);
@@ -72,6 +76,10 @@ public class Cart {
 		Collections.sort(itemsOrdered,compareByCostTitle);
 		print();
 	}
+	public ObservableList<Media> getItemsOrdered() {
+		return itemsOrdered;
+	}
+	
 	
 
 

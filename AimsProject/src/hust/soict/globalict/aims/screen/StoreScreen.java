@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -20,12 +22,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
 import hust.soict.globalict.aims.store.Store;
 
 public class StoreScreen extends JFrame {
 	private Store store;
+	private Cart cart;
 	JPanel createNorth() {
 		JPanel north=new JPanel();
 		north.setLayout(new BoxLayout(north,BoxLayout.Y_AXIS));
@@ -77,7 +81,8 @@ public class StoreScreen extends JFrame {
 		center.setLayout(new GridLayout(3,3,2,2));
 		
 		ArrayList<Media> mediaInStore=store.getItemsInStore();
-		for(int i=0;i<9;i++) {
+		int a=store.getItemsInStore().size()>9?9:store.getItemsInStore().size();
+		for(int i=0;i<a;i++) {
 			MediaStore cell=new MediaStore(mediaInStore.get(i));
 			center.add(cell);
 		}
@@ -86,6 +91,7 @@ public class StoreScreen extends JFrame {
 	}
 	public class MediaStore extends JPanel{
 		private Media media;
+		public Media getMedia() {return this.media;}
 		public MediaStore(Media media) {
 			this.media=media;
 			this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -99,8 +105,14 @@ public class StoreScreen extends JFrame {
 			
 			JPanel container=new JPanel();
 			container.setLayout(new FlowLayout(FlowLayout.CENTER));
-			
-			container.add(new JButton("Add to cart"));
+			JButton btnaddtoCart=new JButton("Add to cart");
+			btnaddtoCart.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                cart.addMedia(media);
+	            }
+	        });
+			container.add(btnaddtoCart);
 			if(media instanceof Playable) {
 				container.add(new JButton("Play"));
 			}
@@ -114,8 +126,9 @@ public class StoreScreen extends JFrame {
 	}
 	
 
-	public StoreScreen(Store store) {
+	public StoreScreen(Store store,Cart cart) {
 		this.store=store;
+		this.cart=cart;
 		Container cp=getContentPane();
 		cp.setLayout(new BorderLayout());
 		
@@ -126,5 +139,6 @@ public class StoreScreen extends JFrame {
 		setSize(1024,768);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
 }
