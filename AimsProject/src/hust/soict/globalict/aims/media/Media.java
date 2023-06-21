@@ -51,12 +51,21 @@ public class Media {
 	}
 
 	@Override
-	public boolean equals ( Object o) {
-		if (!(o instanceof Media)) {
-			return false;
-		}
-		Media a = (Media) o;
-		return (this.title == a.title);
+	public boolean equals(Object obj) {
+	    if (this == obj) {
+	        return true;
+	    }
+	    if (obj == null || getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    Media otherMedia = (Media) obj;
+	    try {
+	        return title.equals(otherMedia.title);
+	    } catch (NullPointerException e) {
+	        return false;
+	    } catch (ClassCastException e) {
+	        return false;
+	    }
 	}
 
 	
